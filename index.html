@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>IIoT Device Registration</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main class="page-container">
+      <section class="form-card">
+        <div class="form-header">
+          <div class="logo">IX</div>
+
+          <div>
+            <h1>IIoT Device Registration</h1>
+
+            <p>
+              Register a new industrial device in the ThinkiX secure network.
+            </p>
+          </div>
+        </div>
+
+        <form id="deviceForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="deviceName"> Device name </label>
+
+              <input
+                type="text"
+                id="deviceName"
+                name="deviceName"
+                placeholder="Example: Temperature Sensor 01"
+              />
+
+              <small class="error-message" id="deviceNameError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="deviceId"> Device ID </label>
+
+              <input
+                type="text"
+                id="deviceId"
+                name="deviceId"
+                placeholder="Example: SENSOR-001"
+              />
+
+              <small class="error-message" id="deviceIdError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="deviceType"> Device type </label>
+
+              <select id="deviceType" name="deviceType">
+                <option value="">Select device type</option>
+
+                <option value="temperature-sensor">Temperature Sensor</option>
+
+                <option value="pressure-sensor">Pressure Sensor</option>
+
+                <option value="vibration-sensor">Vibration Sensor</option>
+
+                <option value="plc-controller">PLC Controller</option>
+
+                <option value="robotic-arm">Robotic Arm</option>
+
+                <option value="monitoring-server">Monitoring Server</option>
+              </select>
+
+              <small class="error-message" id="deviceTypeError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="vlan"> Network VLAN </label>
+
+              <select id="vlan" name="vlan">
+                <option value="">Select VLAN</option>
+
+                <option value="10">VLAN 10 — IoT Sensors</option>
+
+                <option value="20">VLAN 20 — Robotics and PLCs</option>
+
+                <option value="30">VLAN 30 — Firewall</option>
+
+                <option value="40">VLAN 40 — Monitoring</option>
+
+                <option value="50">VLAN 50 — Management</option>
+              </select>
+
+              <small class="error-message" id="vlanError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="ipAddress"> IP address </label>
+
+              <input
+                type="text"
+                id="ipAddress"
+                name="ipAddress"
+                placeholder="Example: 192.168.10.10"
+              />
+
+              <small class="error-message" id="ipAddressError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="macAddress"> MAC address </label>
+
+              <input
+                type="text"
+                id="macAddress"
+                name="macAddress"
+                placeholder="Example: 00:1A:2B:3C:4D:5E"
+              />
+
+              <small class="error-message" id="macAddressError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="ownerName"> Device owner </label>
+
+              <input
+                type="text"
+                id="ownerName"
+                name="ownerName"
+                placeholder="Enter responsible person"
+              />
+
+              <small class="error-message" id="ownerNameError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="email"> Owner email </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
+              />
+
+              <small class="error-message" id="emailError"></small>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="description"> Device description </label>
+
+            <textarea
+              id="description"
+              name="description"
+              rows="5"
+              placeholder="Describe the device and its purpose"
+            ></textarea>
+
+            <small class="character-count" id="characterCount">
+              0 / 300 characters
+            </small>
+
+            <small class="error-message" id="descriptionError"></small>
+          </div>
+
+          <fieldset class="security-section">
+            <legend>Security configuration</legend>
+
+            <label class="checkbox-label">
+              <input type="checkbox" id="tlsEnabled" name="tlsEnabled" />
+
+              <span> Enable MQTT over TLS </span>
+            </label>
+
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                id="certificateInstalled"
+                name="certificateInstalled"
+              />
+
+              <span> Device certificate installed </span>
+            </label>
+
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                id="monitoringEnabled"
+                name="monitoringEnabled"
+              />
+
+              <span> Enable Zeek and Suricata monitoring </span>
+            </label>
+          </fieldset>
+
+          <label class="checkbox-label agreement">
+            <input type="checkbox" id="agreement" name="agreement" />
+
+            <span>
+              I confirm that the device follows the approved security and
+              network policies.
+            </span>
+          </label>
+
+          <small class="error-message" id="agreementError"></small>
+
+          <div class="button-group">
+            <button type="reset" class="secondary-button" id="resetButton">
+              Clear form
+            </button>
+
+            <button type="submit" class="primary-button">
+              Register device
+            </button>
+          </div>
+        </form>
+
+        <div class="success-message" id="successMessage" role="alert">
+          <h2>Registration successful</h2>
+
+          <p>
+            The device information has been validated and submitted
+            successfully.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
