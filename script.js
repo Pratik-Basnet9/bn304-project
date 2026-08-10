@@ -3,11 +3,16 @@
 const form = document.getElementById("deviceForm");
 const description = document.getElementById("description");
 const characterCount = document.getElementById("characterCount");
+
 const successMessage = document.getElementById("successMessage");
+
+const loadingBox = document.getElementById("loadingBox");
+
 const resetButton = document.getElementById("resetButton");
 
 function showError(fieldId, message) {
   const field = document.getElementById(fieldId);
+
   const error = document.getElementById(`${fieldId}Error`);
 
   field.classList.add("invalid");
@@ -16,20 +21,21 @@ function showError(fieldId, message) {
 
 function clearError(fieldId) {
   const field = document.getElementById(fieldId);
+
   const error = document.getElementById(`${fieldId}Error`);
 
   field.classList.remove("invalid");
   error.textContent = "";
 }
 
-function isValidEmail(email) {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function validEmail(email) {
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  return emailPattern.test(email);
+  return pattern.test(email);
 }
 
-function isValidIpAddress(ipAddress) {
-  const parts = ipAddress.split(".");
+function validIp(ip) {
+  const parts = ip.split(".");
 
   if (parts.length !== 4) {
     return false;
@@ -46,14 +52,14 @@ function isValidIpAddress(ipAddress) {
   });
 }
 
-function isValidMacAddress(macAddress) {
-  const macPattern = /^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/;
+function validMac(mac) {
+  const pattern = /^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/;
 
-  return macPattern.test(macAddress);
+  return pattern.test(mac);
 }
 
 function validateForm() {
-  let isValid = true;
+  let valid = true;
 
   const deviceName = document.getElementById("deviceName").value.trim();
 
@@ -71,14 +77,14 @@ function validateForm() {
 
   const email = document.getElementById("email").value.trim();
 
-  const deviceDescription = description.value.trim();
+  const descriptionValue = description.value.trim();
 
   const agreement = document.getElementById("agreement");
 
   if (deviceName.length < 3) {
-    showError("deviceName", "Enter a device name with at least 3 characters.");
+    showError("deviceName", "Enter a valid device name.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("deviceName");
   }
@@ -86,7 +92,7 @@ function validateForm() {
   if (deviceId.length < 3) {
     showError("deviceId", "Enter a valid device ID.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("deviceId");
   }
@@ -94,85 +100,73 @@ function validateForm() {
   if (!deviceType) {
     showError("deviceType", "Select a device type.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("deviceType");
   }
 
   if (!vlan) {
-    showError("vlan", "Select a network VLAN.");
+    showError("vlan", "Select a VLAN.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("vlan");
   }
 
-  if (!isValidIpAddress(ipAddress)) {
+  if (!validIp(ipAddress)) {
     showError("ipAddress", "Enter a valid IPv4 address.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("ipAddress");
   }
 
-  if (!isValidMacAddress(macAddress)) {
-    showError("macAddress", "Use this format: 00:1A:2B:3C:4D:5E");
+  if (!validMac(macAddress)) {
+    showError("macAddress", "Format: 00:1A:2B:3C:4D:5E");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("macAddress");
   }
 
   if (ownerName.length < 2) {
-    showError("ownerName", "Enter the device owner's name.");
+    showError("ownerName", "Enter the device owner.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("ownerName");
   }
 
-  if (!isValidEmail(email)) {
-    showError("email", "Enter a valid email address.");
+  if (!validEmail(email)) {
+    showError("email", "Enter a valid email.");
 
-    isValid = false;
+    valid = false;
   } else {
     clearError("email");
   }
 
-  if (deviceDescription.length < 10) {
+  if (descriptionValue.length < 10) {
     showError("description", "Enter at least 10 characters.");
 
-    isValid = false;
-  } else if (deviceDescription.length > 300) {
-    showError("description", "Description cannot exceed 300 characters.");
-
-    isValid = false;
+    valid = false;
   } else {
     clearError("description");
   }
 
   if (!agreement.checked) {
     document.getElementById("agreementError").textContent =
-      "You must confirm the security policy.";
+      "Please confirm the security policy.";
 
-    isValid = false;
+    valid = false;
   } else {
     document.getElementById("agreementError").textContent = "";
   }
 
-  return isValid;
+  return valid;
 }
 
 description.addEventListener("input", () => {
-  const totalCharacters = description.value.length;
-
-  characterCount.textContent = `${totalCharacters} / 300 characters`;
-
-  if (totalCharacters > 300) {
-    characterCount.style.color = "#dc2626";
-  } else {
-    characterCount.style.color = "#64748b";
-  }
+  characterCount.textContent = `${description.value.length} / 300 characters`;
 });
 
 form.addEventListener("submit", (event) => {
@@ -180,60 +174,63 @@ form.addEventListener("submit", (event) => {
 
   successMessage.classList.remove("show");
 
+  loadingBox.classList.remove("show");
+
   if (!validateForm()) {
     return;
   }
 
-  const formData = {
-    deviceName: document.getElementById("deviceName").value.trim(),
+  loadingBox.classList.add("show");
 
-    deviceId: document.getElementById("deviceId").value.trim(),
+  setTimeout(() => {
+    loadingBox.classList.remove("show");
 
-    deviceType: document.getElementById("deviceType").value,
+    successMessage.classList.add("show");
 
-    vlan: document.getElementById("vlan").value,
+    const formData = {
+      deviceName: document.getElementById("deviceName").value,
 
-    ipAddress: document.getElementById("ipAddress").value.trim(),
+      deviceId: document.getElementById("deviceId").value,
 
-    macAddress: document.getElementById("macAddress").value.trim(),
+      deviceType: document.getElementById("deviceType").value,
 
-    ownerName: document.getElementById("ownerName").value.trim(),
+      vlan: document.getElementById("vlan").value,
 
-    email: document.getElementById("email").value.trim(),
+      ipAddress: document.getElementById("ipAddress").value,
 
-    description: description.value.trim(),
+      macAddress: document.getElementById("macAddress").value,
 
-    tlsEnabled: document.getElementById("tlsEnabled").checked,
+      tlsEnabled: document.getElementById("tlsEnabled").checked,
 
-    certificateInstalled: document.getElementById("certificateInstalled")
-      .checked,
+      certificateInstalled: document.getElementById("certificateInstalled")
+        .checked,
 
-    monitoringEnabled: document.getElementById("monitoringEnabled").checked,
-  };
+      monitoringEnabled: document.getElementById("monitoringEnabled").checked,
+    };
 
-  console.log("Submitted device:", formData);
+    console.log("Submitted Device:", formData);
 
-  successMessage.classList.add("show");
-  successMessage.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-  });
+    successMessage.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, 1200);
 });
 
 resetButton.addEventListener("click", () => {
-  const invalidFields = document.querySelectorAll(".invalid");
+  setTimeout(() => {
+    document.querySelectorAll(".invalid").forEach((field) => {
+      field.classList.remove("invalid");
+    });
 
-  const errors = document.querySelectorAll(".error-message");
+    document.querySelectorAll(".error-message").forEach((error) => {
+      error.textContent = "";
+    });
 
-  invalidFields.forEach((field) => {
-    field.classList.remove("invalid");
-  });
+    characterCount.textContent = "0 / 300 characters";
 
-  errors.forEach((error) => {
-    error.textContent = "";
-  });
+    successMessage.classList.remove("show");
 
-  characterCount.textContent = "0 / 300 characters";
-  characterCount.style.color = "#64748b";
-  successMessage.classList.remove("show");
+    loadingBox.classList.remove("show");
+  }, 0);
 });
