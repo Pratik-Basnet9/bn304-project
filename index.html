@@ -177,7 +177,7 @@
       <div class="management-badge">🔒 AUTHORIZED MANAGEMENT ACCESS</div>
 
       <form id="loginForm">
-        <label for="email">Management Email</label>
+        <label for="email"> Management Email </label>
 
         <input
           type="email"
@@ -186,7 +186,7 @@
           required
         />
 
-        <label for="password">Password</label>
+        <label for="password"> Password </label>
 
         <input
           type="password"
@@ -206,53 +206,51 @@
       <p class="footer-text">ThinkiX Manufacturing • Industrial IoT Security</p>
     </div>
 
-    <!-- LOGIN CONNECTION TO PYTHON BACKEND -->
+    <!-- LOGIN CONNECTION TO LIVE RENDER BACKEND -->
 
     <script>
       const loginForm = document.getElementById("loginForm");
 
       loginForm.addEventListener("submit", async function (event) {
-        // Stop page from refreshing
         event.preventDefault();
 
-        // Get entered email and password
         const email = document.getElementById("email").value;
 
         const password = document.getElementById("password").value;
 
         try {
-          // Send login details to Python
-          const response = await fetch("http://127.0.0.1:5000/login", {
-            method: "POST",
+          // LIVE RENDER BACKEND
+          const response = await fetch(
+            "https://bn304-backend.onrender.com/login",
+            {
+              method: "POST",
 
-            headers: {
-              "Content-Type": "application/json",
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                email: email,
+                password: password,
+              }),
             },
-
-            body: JSON.stringify({
-              email: email,
-              password: password,
-            }),
-          });
+          );
 
           const result = await response.json();
 
-          // Correct login
-          if (result.success) {
+          // LOGIN SUCCESSFUL
+          if (response.ok && result.success) {
             window.location.href = "management.html";
           }
 
-          // Wrong login
+          // WRONG EMAIL OR PASSWORD
           else {
-            alert("Invalid email or password");
+            alert(result.message || "Invalid email or password");
           }
         } catch (error) {
-          // Python backend isn't running
-          console.error(error);
+          console.error("Login error:", error);
 
-          alert(
-            "Cannot connect to ThinkiX backend. Please make sure the Python server is running.",
-          );
+          alert("Cannot connect to the ThinkiX backend. Please try again.");
         }
       });
     </script>
