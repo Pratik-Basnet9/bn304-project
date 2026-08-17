@@ -4,319 +4,257 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>ThinkiX Secure IIoT Registration</title>
+    <title>ThinkiX | Management Login</title>
 
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #07111f;
+        color: white;
+        overflow: hidden;
+      }
+
+      /* Background glow */
+      body::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: #00c8ff;
+        filter: blur(180px);
+        opacity: 0.15;
+        top: -150px;
+        left: -150px;
+      }
+
+      body::after {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: #2563eb;
+        filter: blur(180px);
+        opacity: 0.15;
+        bottom: -150px;
+        right: -150px;
+      }
+
+      .login-container {
+        width: 420px;
+        padding: 45px;
+        background: rgba(15, 30, 50, 0.92);
+        border: 1px solid rgba(0, 200, 255, 0.25);
+        border-radius: 18px;
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 65px;
+        height: 65px;
+        margin: 0 auto 20px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #00c8ff, #2563eb);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 27px;
+        margin-bottom: 8px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #91a4bb;
+        font-size: 14px;
+        margin-bottom: 32px;
+      }
+
+      .management-badge {
+        width: fit-content;
+        margin: 0 auto 25px;
+        padding: 7px 14px;
+        border-radius: 20px;
+        background: rgba(0, 200, 255, 0.1);
+        border: 1px solid rgba(0, 200, 255, 0.25);
+        color: #54d9ff;
+        font-size: 12px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #c8d5e5;
+        font-size: 14px;
+      }
+
+      input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border-radius: 9px;
+        border: 1px solid #31445c;
+        background: #091525;
+        color: white;
+        outline: none;
+        font-size: 14px;
+      }
+
+      input:focus {
+        border-color: #00c8ff;
+        box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.08);
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 9px;
+        background: linear-gradient(90deg, #00bce8, #2563eb);
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 174, 255, 0.25);
+      }
+
+      .footer-text {
+        text-align: center;
+        margin-top: 25px;
+        color: #667b94;
+        font-size: 12px;
+      }
+
+      .status {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+        margin-top: 16px;
+        color: #6f849b;
+        font-size: 12px;
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        background: #22c55e;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #22c55e;
+      }
+    </style>
   </head>
 
   <body>
-    <header class="hero">
-      <nav class="navbar">
-        <div class="brand">
-          <div class="brand-icon">IX</div>
+    <div class="login-container">
+      <div class="logo">IX</div>
 
-          <div>
-            <h2>ThinkiX Manufacturing</h2>
-            <p>Secure Industrial IoT Platform</p>
-          </div>
-        </div>
+      <h1>ThinkiX Management</h1>
 
-        <div class="secure-badge">
-          <span class="status-dot"></span>
-          SYSTEM SECURE
-        </div>
-      </nav>
+      <p class="subtitle">Secure Industrial IoT Management Portal</p>
 
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="eyebrow">INDUSTRIAL NETWORK SECURITY</p>
+      <div class="management-badge">🔒 AUTHORIZED MANAGEMENT ACCESS</div>
 
-          <h1>
-            Secure Industrial IoT
-            <span>Device Registration</span>
-          </h1>
+      <form id="loginForm">
+        <label for="email">Management Email</label>
 
-          <p class="hero-description">
-            Register, validate and assign industrial devices to the correct
-            secure network zone before deployment.
-          </p>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter management email"
+          required
+        />
 
-          <a href="#registration" class="hero-button"> Register Device ↓ </a>
-        </div>
+        <label for="password">Password</label>
 
-        <div class="network-animation">
-          <div class="network-label sensor-label">IoT Sensors</div>
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter password"
+          required
+        />
 
-          <div class="network-label plc-label">PLC</div>
+        <button type="submit">Secure Login →</button>
+      </form>
 
-          <div class="network-label firewall-label">Firewall</div>
-
-          <div class="network-label ids-label">Monitoring</div>
-
-          <div class="node sensor-node"></div>
-          <div class="node plc-node"></div>
-          <div class="node firewall-node"></div>
-          <div class="node ids-node"></div>
-
-          <div class="network-line line-one"></div>
-          <div class="network-line line-two"></div>
-          <div class="network-line line-three"></div>
-
-          <div class="moving-packet packet-one"></div>
-          <div class="moving-packet packet-two"></div>
-          <div class="moving-packet packet-three"></div>
-        </div>
-      </div>
-    </header>
-
-    <section class="status-section">
-      <div class="status-card">
-        <div class="status-icon">●</div>
-
-        <div>
-          <h3>Network Online</h3>
-          <p>Industrial VLANs operational</p>
-        </div>
+      <div class="status">
+        <span class="dot"></span>
+        ThinkiX Secure Gateway Online
       </div>
 
-      <div class="status-card">
-        <div class="status-icon">🔒</div>
-
-        <div>
-          <h3>TLS Active</h3>
-          <p>Secure MQTT communication</p>
-        </div>
-      </div>
-
-      <div class="status-card">
-        <div class="status-icon">◉</div>
-
-        <div>
-          <h3>IDS Monitoring</h3>
-          <p>Zeek & Suricata active</p>
-        </div>
-      </div>
-    </section>
-
-    <main class="page-container">
-      <section class="form-card" id="registration">
-        <div class="form-header">
-          <div>
-            <p class="section-label">DEVICE ONBOARDING</p>
-
-            <h2>Register New Industrial Device</h2>
-
-            <p>
-              Enter the device information and security configuration below.
-            </p>
-          </div>
-
-          <div class="security-ring">🔐</div>
-        </div>
-
-        <form id="deviceForm" novalidate>
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="deviceName"> Device Name </label>
-
-              <input
-                type="text"
-                id="deviceName"
-                placeholder="Temperature Sensor 01"
-              />
-
-              <small class="error-message" id="deviceNameError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="deviceId"> Device ID </label>
-
-              <input type="text" id="deviceId" placeholder="TEMP-SENSOR-001" />
-
-              <small class="error-message" id="deviceIdError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="deviceType"> Device Type </label>
-
-              <select id="deviceType">
-                <option value="">Select device type</option>
-
-                <option value="temperature">Temperature Sensor</option>
-
-                <option value="pressure">Pressure Sensor</option>
-
-                <option value="vibration">Vibration Sensor</option>
-
-                <option value="plc">PLC Controller</option>
-
-                <option value="robotic">Robotic Arm</option>
-
-                <option value="monitoring">Monitoring Server</option>
-              </select>
-
-              <small class="error-message" id="deviceTypeError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="vlan"> Network VLAN </label>
-
-              <select id="vlan">
-                <option value="">Select VLAN</option>
-
-                <option value="10">VLAN 10 — IoT Sensors</option>
-
-                <option value="20">VLAN 20 — Robotics / PLC</option>
-
-                <option value="30">VLAN 30 — Firewall</option>
-
-                <option value="40">VLAN 40 — Monitoring</option>
-
-                <option value="50">VLAN 50 — Management</option>
-              </select>
-
-              <small class="error-message" id="vlanError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="ipAddress"> IP Address </label>
-
-              <input type="text" id="ipAddress" placeholder="192.168.10.10" />
-
-              <small class="error-message" id="ipAddressError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="macAddress"> MAC Address </label>
-
-              <input
-                type="text"
-                id="macAddress"
-                placeholder="00:1A:2B:3C:4D:5E"
-              />
-
-              <small class="error-message" id="macAddressError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="ownerName"> Device Owner </label>
-
-              <input type="text" id="ownerName" placeholder="Production Team" />
-
-              <small class="error-message" id="ownerNameError"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="email"> Owner Email </label>
-
-              <input
-                type="email"
-                id="email"
-                placeholder="production@thinkix.com"
-              />
-
-              <small class="error-message" id="emailError"></small>
-            </div>
-          </div>
-
-          <div class="form-group full-width">
-            <label for="description"> Device Description </label>
-
-            <textarea
-              id="description"
-              rows="5"
-              maxlength="300"
-              placeholder="Describe the device and its role in the industrial network..."
-            ></textarea>
-
-            <small class="character-count" id="characterCount">
-              0 / 300 characters
-            </small>
-
-            <small class="error-message" id="descriptionError"></small>
-          </div>
-
-          <div class="security-box">
-            <div class="security-box-header">
-              <div>
-                <h3>Security Configuration</h3>
-                <p>Select the controls enabled for this device.</p>
-              </div>
-
-              <span class="shield"> 🛡️ </span>
-            </div>
-
-            <label class="toggle-row">
-              <input type="checkbox" id="tlsEnabled" />
-
-              <span class="toggle"></span>
-
-              <span> MQTT over TLS </span>
-            </label>
-
-            <label class="toggle-row">
-              <input type="checkbox" id="certificateInstalled" />
-
-              <span class="toggle"></span>
-
-              <span> Device certificate installed </span>
-            </label>
-
-            <label class="toggle-row">
-              <input type="checkbox" id="monitoringEnabled" />
-
-              <span class="toggle"></span>
-
-              <span> Zeek & Suricata monitoring </span>
-            </label>
-          </div>
-
-          <label class="agreement-row">
-            <input type="checkbox" id="agreement" />
-
-            <span>
-              I confirm that this device follows the approved security and
-              network policy.
-            </span>
-          </label>
-
-          <small class="error-message" id="agreementError"></small>
-
-          <div class="button-group">
-            <button type="reset" class="secondary-button" id="resetButton">
-              Clear Form
-            </button>
-
-            <button type="submit" class="primary-button">
-              <span> Register Device </span>
-
-              <span class="button-arrow"> → </span>
-            </button>
-          </div>
-        </form>
-
-        <div class="loading-box" id="loadingBox">
-          <div class="loader"></div>
-
-          <p>Validating secure device configuration...</p>
-        </div>
-
-        <div class="success-message" id="successMessage">
-          <div class="success-icon">✓</div>
-
-          <div>
-            <h3>Device Registration Successful</h3>
-
-            <p>Device information passed front-end validation successfully.</p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>ThinkiX Manufacturing • Secure Industrial IoT Prototype</p>
-    </footer>
-
-    <script src="script.js"></script>
+      <p class="footer-text">ThinkiX Manufacturing • Industrial IoT Security</p>
+    </div>
+
+    <!-- LOGIN CONNECTION TO PYTHON BACKEND -->
+
+    <script>
+      const loginForm = document.getElementById("loginForm");
+
+      loginForm.addEventListener("submit", async function (event) {
+        // Stop page from refreshing
+        event.preventDefault();
+
+        // Get entered email and password
+        const email = document.getElementById("email").value;
+
+        const password = document.getElementById("password").value;
+
+        try {
+          // Send login details to Python
+          const response = await fetch("http://127.0.0.1:5000/login", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+          });
+
+          const result = await response.json();
+
+          // Correct login
+          if (result.success) {
+            window.location.href = "management.html";
+          }
+
+          // Wrong login
+          else {
+            alert("Invalid email or password");
+          }
+        } catch (error) {
+          // Python backend isn't running
+          console.error(error);
+
+          alert(
+            "Cannot connect to ThinkiX backend. Please make sure the Python server is running.",
+          );
+        }
+      });
+    </script>
   </body>
 </html>
