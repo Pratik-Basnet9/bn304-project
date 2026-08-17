@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ThinkiX Secure IIoT Registration</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="hero">
+      <nav class="navbar">
+        <div class="brand">
+          <div class="brand-icon">IX</div>
+
+          <div>
+            <h2>ThinkiX Manufacturing</h2>
+            <p>Secure Industrial IoT Platform</p>
+          </div>
+        </div>
+
+        <div class="secure-badge">
+          <span class="status-dot"></span>
+          SYSTEM SECURE
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-text">
+          <p class="eyebrow">INDUSTRIAL NETWORK SECURITY</p>
+
+          <h1>
+            Secure Industrial IoT
+            <span>Device Registration</span>
+          </h1>
+
+          <p class="hero-description">
+            Register, validate and assign industrial devices to the correct
+            secure network zone before deployment.
+          </p>
+
+          <a href="#registration" class="hero-button"> Register Device ↓ </a>
+        </div>
+
+        <div class="network-animation">
+          <div class="network-label sensor-label">IoT Sensors</div>
+
+          <div class="network-label plc-label">PLC</div>
+
+          <div class="network-label firewall-label">Firewall</div>
+
+          <div class="network-label ids-label">Monitoring</div>
+
+          <div class="node sensor-node"></div>
+          <div class="node plc-node"></div>
+          <div class="node firewall-node"></div>
+          <div class="node ids-node"></div>
+
+          <div class="network-line line-one"></div>
+          <div class="network-line line-two"></div>
+          <div class="network-line line-three"></div>
+
+          <div class="moving-packet packet-one"></div>
+          <div class="moving-packet packet-two"></div>
+          <div class="moving-packet packet-three"></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="status-section">
+      <div class="status-card">
+        <div class="status-icon">●</div>
+
+        <div>
+          <h3>Network Online</h3>
+          <p>Industrial VLANs operational</p>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-icon">🔒</div>
+
+        <div>
+          <h3>TLS Active</h3>
+          <p>Secure MQTT communication</p>
+        </div>
+      </div>
+
+      <div class="status-card">
+        <div class="status-icon">◉</div>
+
+        <div>
+          <h3>IDS Monitoring</h3>
+          <p>Zeek & Suricata active</p>
+        </div>
+      </div>
+    </section>
+
+    <main class="page-container">
+      <section class="form-card" id="registration">
+        <div class="form-header">
+          <div>
+            <p class="section-label">DEVICE ONBOARDING</p>
+
+            <h2>Register New Industrial Device</h2>
+
+            <p>
+              Enter the device information and security configuration below.
+            </p>
+          </div>
+
+          <div class="security-ring">🔐</div>
+        </div>
+
+        <form id="deviceForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="deviceName"> Device Name </label>
+
+              <input
+                type="text"
+                id="deviceName"
+                placeholder="Temperature Sensor 01"
+              />
+
+              <small class="error-message" id="deviceNameError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="deviceId"> Device ID </label>
+
+              <input type="text" id="deviceId" placeholder="TEMP-SENSOR-001" />
+
+              <small class="error-message" id="deviceIdError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="deviceType"> Device Type </label>
+
+              <select id="deviceType">
+                <option value="">Select device type</option>
+
+                <option value="temperature">Temperature Sensor</option>
+
+                <option value="pressure">Pressure Sensor</option>
+
+                <option value="vibration">Vibration Sensor</option>
+
+                <option value="plc">PLC Controller</option>
+
+                <option value="robotic">Robotic Arm</option>
+
+                <option value="monitoring">Monitoring Server</option>
+              </select>
+
+              <small class="error-message" id="deviceTypeError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="vlan"> Network VLAN </label>
+
+              <select id="vlan">
+                <option value="">Select VLAN</option>
+
+                <option value="10">VLAN 10 — IoT Sensors</option>
+
+                <option value="20">VLAN 20 — Robotics / PLC</option>
+
+                <option value="30">VLAN 30 — Firewall</option>
+
+                <option value="40">VLAN 40 — Monitoring</option>
+
+                <option value="50">VLAN 50 — Management</option>
+              </select>
+
+              <small class="error-message" id="vlanError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="ipAddress"> IP Address </label>
+
+              <input type="text" id="ipAddress" placeholder="192.168.10.10" />
+
+              <small class="error-message" id="ipAddressError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="macAddress"> MAC Address </label>
+
+              <input
+                type="text"
+                id="macAddress"
+                placeholder="00:1A:2B:3C:4D:5E"
+              />
+
+              <small class="error-message" id="macAddressError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="ownerName"> Device Owner </label>
+
+              <input type="text" id="ownerName" placeholder="Production Team" />
+
+              <small class="error-message" id="ownerNameError"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="email"> Owner Email </label>
+
+              <input
+                type="email"
+                id="email"
+                placeholder="production@thinkix.com"
+              />
+
+              <small class="error-message" id="emailError"></small>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="description"> Device Description </label>
+
+            <textarea
+              id="description"
+              rows="5"
+              maxlength="300"
+              placeholder="Describe the device and its role in the industrial network..."
+            ></textarea>
+
+            <small class="character-count" id="characterCount">
+              0 / 300 characters
+            </small>
+
+            <small class="error-message" id="descriptionError"></small>
+          </div>
+
+          <div class="security-box">
+            <div class="security-box-header">
+              <div>
+                <h3>Security Configuration</h3>
+                <p>Select the controls enabled for this device.</p>
+              </div>
+
+              <span class="shield"> 🛡️ </span>
+            </div>
+
+            <label class="toggle-row">
+              <input type="checkbox" id="tlsEnabled" />
+
+              <span class="toggle"></span>
+
+              <span> MQTT over TLS </span>
+            </label>
+
+            <label class="toggle-row">
+              <input type="checkbox" id="certificateInstalled" />
+
+              <span class="toggle"></span>
+
+              <span> Device certificate installed </span>
+            </label>
+
+            <label class="toggle-row">
+              <input type="checkbox" id="monitoringEnabled" />
+
+              <span class="toggle"></span>
+
+              <span> Zeek & Suricata monitoring </span>
+            </label>
+          </div>
+
+          <label class="agreement-row">
+            <input type="checkbox" id="agreement" />
+
+            <span>
+              I confirm that this device follows the approved security and
+              network policy.
+            </span>
+          </label>
+
+          <small class="error-message" id="agreementError"></small>
+
+          <div class="button-group">
+            <button type="reset" class="secondary-button" id="resetButton">
+              Clear Form
+            </button>
+
+            <button type="submit" class="primary-button">
+              <span> Register Device </span>
+
+              <span class="button-arrow"> → </span>
+            </button>
+          </div>
+        </form>
+
+        <div class="loading-box" id="loadingBox">
+          <div class="loader"></div>
+
+          <p>Validating secure device configuration...</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">✓</div>
+
+          <div>
+            <h3>Device Registration Successful</h3>
+
+            <p>Device information passed front-end validation successfully.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>ThinkiX Manufacturing • Secure Industrial IoT Prototype</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
