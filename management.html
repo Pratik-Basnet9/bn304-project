@@ -4,102 +4,483 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>ThinkiX Secure IIoT Registration</title>
+    <title>ThinkiX | Management Dashboard</title>
 
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <header class="hero">
-      <nav class="navbar">
-        <div class="brand">
-          <div class="brand-icon">IX</div>
+    <!-- =========================
+       TOP NAVIGATION
+  ========================== -->
 
-          <div>
-            <h2>ThinkiX Manufacturing</h2>
-            <p>Secure Industrial IoT Platform</p>
-          </div>
+    <header class="dashboard-header">
+      <div class="dashboard-brand">
+        <div class="brand-icon">IX</div>
+
+        <div>
+          <h2>ThinkiX Management</h2>
+          <p>Industrial IoT Security Platform</p>
         </div>
+      </div>
 
-        <div class="secure-badge">
+      <div class="dashboard-header-right">
+        <div class="system-secure">
           <span class="status-dot"></span>
-          SYSTEM SECURE
-        </div>
-      </nav>
-
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="eyebrow">INDUSTRIAL NETWORK SECURITY</p>
-
-          <h1>
-            Secure Industrial IoT
-            <span>Device Registration</span>
-          </h1>
-
-          <p class="hero-description">
-            Register, validate and assign industrial devices to the correct
-            secure network zone before deployment.
-          </p>
-
-          <a href="#registration" class="hero-button"> Register Device ↓ </a>
+          SYSTEM ONLINE
         </div>
 
-        <div class="network-animation">
-          <div class="network-label sensor-label">IoT Sensors</div>
-
-          <div class="network-label plc-label">PLC</div>
-
-          <div class="network-label firewall-label">Firewall</div>
-
-          <div class="network-label ids-label">Monitoring</div>
-
-          <div class="node sensor-node"></div>
-          <div class="node plc-node"></div>
-          <div class="node firewall-node"></div>
-          <div class="node ids-node"></div>
-
-          <div class="network-line line-one"></div>
-          <div class="network-line line-two"></div>
-          <div class="network-line line-three"></div>
-
-          <div class="moving-packet packet-one"></div>
-          <div class="moving-packet packet-two"></div>
-          <div class="moving-packet packet-three"></div>
-        </div>
+        <a href="index.html" class="logout-button"> Logout </a>
       </div>
     </header>
 
-    <section class="status-section">
-      <div class="status-card">
-        <div class="status-icon">●</div>
+    <!-- =========================
+       DASHBOARD
+  ========================== -->
 
+    <main class="dashboard-container">
+      <section class="dashboard-title">
         <div>
-          <h3>Network Online</h3>
-          <p>Industrial VLANs operational</p>
+          <p class="section-label">INDUSTRIAL IoT MONITORING</p>
+
+          <h1>Management Dashboard</h1>
+
+          <p>
+            Monitor industrial devices, network activity, security events and
+            system interfaces.
+          </p>
         </div>
-      </div>
 
-      <div class="status-card">
-        <div class="status-icon">🔒</div>
+        <div class="demo-badge">DEMO DATA</div>
+      </section>
 
-        <div>
-          <h3>TLS Active</h3>
-          <p>Secure MQTT communication</p>
+      <!-- =========================
+         SUMMARY CARDS
+    ========================== -->
+
+      <section class="dashboard-stats">
+        <div class="dashboard-stat-card">
+          <div class="stat-icon">◉</div>
+
+          <div>
+            <p>Connected Devices</p>
+            <h2 id="totalDevices">4</h2>
+          </div>
         </div>
-      </div>
 
-      <div class="status-card">
-        <div class="status-icon">◉</div>
+        <div class="dashboard-stat-card">
+          <div class="stat-icon online-icon">●</div>
 
-        <div>
-          <h3>IDS Monitoring</h3>
-          <p>Zeek & Suricata active</p>
+          <div>
+            <p>Online Devices</p>
+            <h2 id="onlineDevices">3</h2>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <main class="page-container">
-      <section class="form-card" id="registration">
+        <div class="dashboard-stat-card">
+          <div class="stat-icon alert-icon">⚠</div>
+
+          <div>
+            <p>Security Alerts</p>
+            <h2 id="alertCount">2</h2>
+          </div>
+        </div>
+
+        <div class="dashboard-stat-card">
+          <div class="stat-icon email-icon">✉</div>
+
+          <div>
+            <p>Email Alerts</p>
+            <h2>3</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         TRAFFIC + DEVICE STATUS
+    ========================== -->
+
+      <section class="dashboard-grid">
+        <!-- NETWORK TRAFFIC -->
+
+        <div class="dashboard-panel traffic-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">NETWORK MONITORING</p>
+
+              <h2>Network Traffic</h2>
+            </div>
+
+            <span class="live-badge"> ● DEMO LIVE </span>
+          </div>
+
+          <div class="traffic-summary">
+            <div>
+              <small>Incoming</small>
+              <strong>1.8 Mbps</strong>
+            </div>
+
+            <div>
+              <small>Outgoing</small>
+              <strong>0.9 Mbps</strong>
+            </div>
+
+            <div>
+              <small>MQTT Messages</small>
+              <strong>128</strong>
+            </div>
+          </div>
+
+          <!-- SIMPLE GRAPH
+             JavaScript can animate this later -->
+
+          <div class="traffic-chart">
+            <svg viewBox="0 0 700 250" preserveAspectRatio="none">
+              <defs>
+                <linearGradient
+                  id="trafficGradient"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.40" />
+
+                  <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <line x1="0" y1="50" x2="700" y2="50" class="chart-grid-line" />
+
+              <line x1="0" y1="125" x2="700" y2="125" class="chart-grid-line" />
+
+              <line x1="0" y1="200" x2="700" y2="200" class="chart-grid-line" />
+
+              <path
+                class="traffic-area"
+                d="
+                M0 190
+                L70 160
+                L140 175
+                L210 110
+                L280 135
+                L350 75
+                L420 120
+                L490 85
+                L560 140
+                L630 95
+                L700 115
+                L700 250
+                L0 250
+                Z
+              "
+              />
+
+              <polyline
+                class="traffic-line"
+                points="
+                0,190
+                70,160
+                140,175
+                210,110
+                280,135
+                350,75
+                420,120
+                490,85
+                560,140
+                630,95
+                700,115
+              "
+              />
+            </svg>
+          </div>
+
+          <div class="chart-labels">
+            <span>10:00</span>
+            <span>10:05</span>
+            <span>10:10</span>
+            <span>10:15</span>
+            <span>10:20</span>
+          </div>
+        </div>
+
+        <!-- CONNECTED DEVICES -->
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">DEVICE MONITORING</p>
+
+              <h2>Connected Devices</h2>
+            </div>
+          </div>
+
+          <div class="device-list">
+            <div class="device-row">
+              <span class="device-status online"></span>
+
+              <div class="device-info">
+                <strong>Sensor1</strong>
+                <small>192.168.10.10 • VLAN 10</small>
+              </div>
+
+              <span class="status-label online-text"> ONLINE </span>
+            </div>
+
+            <div class="device-row">
+              <span class="device-status online"></span>
+
+              <div class="device-info">
+                <strong>PLC-01</strong>
+                <small>192.168.20.10 • VLAN 20</small>
+              </div>
+
+              <span class="status-label online-text"> ONLINE </span>
+            </div>
+
+            <div class="device-row">
+              <span class="device-status online"></span>
+
+              <div class="device-info">
+                <strong>MQTT Broker</strong>
+                <small>192.168.20.20 • Port 1883</small>
+              </div>
+
+              <span class="status-label online-text"> ACTIVE </span>
+            </div>
+
+            <div class="device-row">
+              <span class="device-status offline"></span>
+
+              <div class="device-info">
+                <strong>Sensor2</strong>
+                <small>192.168.10.30 • VLAN 10</small>
+              </div>
+
+              <span class="status-label offline-text"> OFFLINE </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         SECURITY + INTERFACES
+    ========================== -->
+
+      <section class="dashboard-grid">
+        <!-- SECURITY ALERTS -->
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">SECURITY MONITORING</p>
+
+              <h2>Security Alerts</h2>
+            </div>
+
+            <span class="warning-badge"> 2 Alerts </span>
+          </div>
+
+          <div class="alert-list">
+            <div class="security-alert high-alert">
+              <div class="alert-symbol">⚠</div>
+
+              <div>
+                <strong> Suspicious Network Connection </strong>
+
+                <p>Unknown connection attempt detected toward PLC-01.</p>
+
+                <small> 14:22 • HIGH </small>
+              </div>
+            </div>
+
+            <div class="security-alert medium-alert">
+              <div class="alert-symbol">!</div>
+
+              <div>
+                <strong> Multiple Connection Attempts </strong>
+
+                <p>Repeated connection attempts observed from Sensor1.</p>
+
+                <small> 14:15 • MEDIUM </small>
+              </div>
+            </div>
+
+            <div class="security-alert normal-alert">
+              <div class="alert-symbol">✓</div>
+
+              <div>
+                <strong> MQTT Communication Normal </strong>
+
+                <p>Sensor-to-broker communication operating normally.</p>
+
+                <small> 14:05 • NORMAL </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERFACE STATUS -->
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">NETWORK INTERFACES</p>
+
+              <h2>Interface Status</h2>
+            </div>
+          </div>
+
+          <div class="interface-list">
+            <div class="interface-row">
+              <div>
+                <strong>pfSense WAN</strong>
+                <small>Internet Gateway</small>
+              </div>
+
+              <span class="interface-up"> ● UP </span>
+            </div>
+
+            <div class="interface-row">
+              <div>
+                <strong>pfSense LAN</strong>
+                <small>Industrial Network</small>
+              </div>
+
+              <span class="interface-up"> ● UP </span>
+            </div>
+
+            <div class="interface-row">
+              <div>
+                <strong>MQTT Broker</strong>
+                <small>TCP Port 1883</small>
+              </div>
+
+              <span class="interface-up"> ● ACTIVE </span>
+            </div>
+
+            <div class="interface-row">
+              <div>
+                <strong>Suricata IDS</strong>
+                <small>Security Monitoring</small>
+              </div>
+
+              <span class="interface-monitoring"> ● MONITORING </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         GNS3 + EMAIL HISTORY
+    ========================== -->
+
+      <section class="dashboard-grid">
+        <!-- GNS3 -->
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">LAB INTEGRATION</p>
+
+              <h2>GNS3 Live Data</h2>
+            </div>
+
+            <span class="demo-badge"> CONNECTION PENDING </span>
+          </div>
+
+          <div class="gns3-message">
+            <div class="gns3-icon">◉</div>
+
+            <div>
+              <h3>GNS3 Integration Ready</h3>
+
+              <p>This section currently uses demonstration information.</p>
+
+              <p>
+                Later it will display live node status and network information
+                from the GNS3 lab.
+              </p>
+            </div>
+          </div>
+
+          <div class="gns3-nodes">
+            <span>Sensor1</span>
+            <span>PLC</span>
+            <span>pfSense</span>
+            <span>Suricata</span>
+            <span>Mosquitto</span>
+          </div>
+        </div>
+
+        <!-- EMAIL HISTORY -->
+
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">MANAGEMENT NOTIFICATIONS</p>
+
+              <h2>Email Alert History</h2>
+            </div>
+          </div>
+
+          <div class="email-history">
+            <div class="email-row">
+              <div class="email-icon-small">✉</div>
+
+              <div>
+                <strong> Security Alert </strong>
+
+                <p>Suspicious PLC connection detected.</p>
+
+                <small> 14:22 </small>
+              </div>
+
+              <span class="email-sent"> SENT </span>
+            </div>
+
+            <div class="email-row">
+              <div class="email-icon-small">✉</div>
+
+              <div>
+                <strong> New Device Detected </strong>
+
+                <p>Sensor1 connected to VLAN 10.</p>
+
+                <small> 13:48 </small>
+              </div>
+
+              <span class="email-sent"> SENT </span>
+            </div>
+
+            <div class="email-row">
+              <div class="email-icon-small">✉</div>
+
+              <div>
+                <strong> Device Offline </strong>
+
+                <p>Sensor2 stopped responding.</p>
+
+                <small> 12:35 </small>
+              </div>
+
+              <span class="email-sent"> SENT </span>
+            </div>
+          </div>
+
+          <div class="management-email">
+            Management notification email:
+
+            <strong> admin@thinkix.com </strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+         DEVICE REGISTRATION
+    ========================== -->
+
+      <section class="form-card dashboard-registration" id="registration">
         <div class="form-header">
           <div>
             <p class="section-label">DEVICE ONBOARDING</p>
@@ -240,6 +621,7 @@
             <div class="security-box-header">
               <div>
                 <h3>Security Configuration</h3>
+
                 <p>Select the controls enabled for this device.</p>
               </div>
 
@@ -314,7 +696,7 @@
     </main>
 
     <footer>
-      <p>ThinkiX Manufacturing • Secure Industrial IoT Prototype</p>
+      <p>ThinkiX Manufacturing • Secure Industrial IoT Management Platform</p>
     </footer>
 
     <script src="script.js"></script>
